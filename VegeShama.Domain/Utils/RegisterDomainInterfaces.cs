@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using VegeShama.Domain.Enums;
+using VegeShama.Common.Enums;
 
-namespace VegeShama.Infrastructure.Utils
+namespace VegeShama.Domain.Utils
 {
     public static class RegisterDomainInterfaces
     {
@@ -18,5 +18,6 @@ namespace VegeShama.Infrastructure.Utils
             DatabaseProviderEnum.Relational => services.AddRelationalProvider(),
             _ => throw new InvalidOperationException("Tried to initialise application with uknown database type")
         };
+
     }
 }

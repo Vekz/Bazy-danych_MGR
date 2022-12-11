@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VegeShama.Common\VegeShama.Common.csproj" />
-    <ProjectReference Include="..\VegeShama.Infrastructure\VegeShama.Infrastructure.csproj" />
+    <Folder Include="DatabaseModels\MongoDB\" />
+    <Folder Include="DatabaseModels\EFCore\" />
+    <Folder Include="DatabaseModels\Relational\" />
   </ItemGroup>
 
 </Project>
