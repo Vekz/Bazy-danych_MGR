@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
@@ -16,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VegeShama.Common\VegeShama.Common.csproj" />
     <ProjectReference Include="..\VegeShama.DAL\VegeShama.DAL.csproj" />
   </ItemGroup>
 
