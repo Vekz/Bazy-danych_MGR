@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using VegeShama.Common.Enums;
+using VegeShama.Infrastructure.Utils;
 
 namespace VegeShama.Domain.Utils
 {

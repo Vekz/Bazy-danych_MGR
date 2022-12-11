@@ -5,9 +5,9 @@ namespace VegeShama.Domain.Services.Interfaces
 {
     public interface IUsersService
     {
-        public async Task<User> GetUser(Guid id);
-        public async Task<User> RegisterUser(RegisterUserModel model);
-        public async Task<User> UpdateUser(Guid id, UpdateUserModel model);
-        public async Task DeleteUser(Guid id);
+        public Task<User> GetUser(Guid id);
+        public Task<User> RegisterUser(RegisterUserModel model);
+        public Task<User> UpdateUser(Guid id, UpdateUserModel model);
+        public Task DeleteUser(Guid id);
     }
 }
