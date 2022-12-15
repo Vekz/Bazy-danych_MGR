@@ -7,12 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MongoDB\" />
+    <Folder Include="RavenDB\" />
     <Folder Include="Relational\" />
     <Folder Include="EFCore\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
   </ItemGroup>
 </Project>

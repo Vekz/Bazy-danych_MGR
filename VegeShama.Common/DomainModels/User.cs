@@ -1,6 +1,6 @@
 ﻿using VegeShama.Common.Enums;
 using EFCoreDal = VegeShama.Common.DatabaseModels.EFCore;
-using MongoDBDal = VegeShama.Common.DatabaseModels.MongoDB;
+using RavenDBDal = VegeShama.Common.DatabaseModels.RavenDB;
 using RelationalDal = VegeShama.Common.DatabaseModels.Relational;
 
 namespace VegeShama.Common.DomainModels
@@ -14,7 +14,7 @@ namespace VegeShama.Common.DomainModels
         public UserType Type { get; }
         public List<Order> Orders { get; set; }
 
-        public User(MongoDBDal.User user)
+        public User(RavenDBDal.User user)
         {
             Id = user.Id;
             Name = user.Name;

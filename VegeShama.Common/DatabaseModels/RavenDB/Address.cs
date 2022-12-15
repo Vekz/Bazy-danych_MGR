@@ -1,4 +1,4 @@
-﻿namespace VegeShama.Common.DatabaseModels.MongoDB
+﻿namespace VegeShama.Common.DatabaseModels.RavenDB
 {
     public class Address
     {

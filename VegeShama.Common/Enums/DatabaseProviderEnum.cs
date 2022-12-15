@@ -2,7 +2,7 @@
 {
     public enum DatabaseProviderEnum
     {
-        MongoDB,
+        RavenDB,
         EFCore,
         Relational
     }

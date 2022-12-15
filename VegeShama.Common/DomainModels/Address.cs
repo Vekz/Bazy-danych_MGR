@@ -1,5 +1,5 @@
 ﻿using EFCoreDal = VegeShama.Common.DatabaseModels.EFCore;
-using MongoDBDal = VegeShama.Common.DatabaseModels.MongoDB;
+using RavenDBDal = VegeShama.Common.DatabaseModels.RavenDB;
 using RelationalDal = VegeShama.Common.DatabaseModels.Relational;
 
 namespace VegeShama.Common.DomainModels
@@ -12,7 +12,7 @@ namespace VegeShama.Common.DomainModels
         public string PostCode { get; set; }
         public string City { get; set; }
 
-        public Address(MongoDBDal.Address address)
+        public Address(RavenDBDal.Address address)
         {
             Id = address.Id;
             Street = address.Street;

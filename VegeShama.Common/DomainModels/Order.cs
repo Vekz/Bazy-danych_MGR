@@ -1,5 +1,5 @@
 ﻿using EFCoreDal = VegeShama.Common.DatabaseModels.EFCore;
-using MongoDBDal = VegeShama.Common.DatabaseModels.MongoDB;
+using RavenDBDal = VegeShama.Common.DatabaseModels.RavenDB;
 using RelationalDal = VegeShama.Common.DatabaseModels.Relational;
 
 namespace VegeShama.Common.DomainModels
@@ -13,7 +13,7 @@ namespace VegeShama.Common.DomainModels
         public Payment Payment { get; set; }
         public List<Product> Products { get; set; }
 
-        public Order(MongoDBDal.Order order)
+        public Order(RavenDBDal.Order order)
         {
             Id = order.Id;
             DueDate = DateOnly.FromDateTime(order.DueDate);

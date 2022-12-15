@@ -4,9 +4,9 @@ namespace VegeShama.Infrastructure.Utils
 {
     public static class RegisterInfrastructureInterfaces
     {
-        public static IServiceCollection AddMongoDBProvider(this IServiceCollection services)
+        public static IServiceCollection AddRavenDBProvider(this IServiceCollection services)
         {
-            //Register MongoDB repositories
+            //Register RavenDB repositories
             return services;
         }
 

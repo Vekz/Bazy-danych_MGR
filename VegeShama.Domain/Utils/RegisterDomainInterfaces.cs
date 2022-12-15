@@ -21,7 +21,7 @@ namespace VegeShama.Domain.Utils
 
         public static IServiceCollection AddDatabaseProvider(this IServiceCollection services, DatabaseProviderEnum databaseProvider) => databaseProvider switch
         {
-            DatabaseProviderEnum.MongoDB => services.AddMongoDBProvider(),
+            DatabaseProviderEnum.RavenDB => services.AddRavenDBProvider(),
             DatabaseProviderEnum.EFCore => services.AddEFCoreProvider(),
             DatabaseProviderEnum.Relational => services.AddRelationalProvider(),
             _ => throw new InvalidOperationException("Tried to initialise application with uknown database type")
