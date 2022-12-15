@@ -1,4 +1,7 @@
 ﻿using VegeShama.Common.Enums;
+using EFCoreDal = VegeShama.Common.DatabaseModels.EFCore;
+using RavenDBDal = VegeShama.Common.DatabaseModels.RavenDB;
+using RelationalDal = VegeShama.Common.DatabaseModels.Relational;
 
 namespace VegeShama.Common.DomainModels
 {
@@ -9,28 +12,28 @@ namespace VegeShama.Common.DomainModels
         public PaymentMethod PaymentMethod { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
 
-        public Payment(MongoDB.Payment payment)
+        public Payment(RavenDBDal.Payment payment)
         {
             Id = payment.Id;
-            DueDate = payment.DueDate.Date;
-            PaymentMethod = (PaymentMethod)payment.PaymentMethod;
-            PaymentStatus = (PaymentStatus)payment.PaymentStatus;
+            DueDate = DateOnly.FromDateTime(payment.DueDate);
+            PaymentMethod = (PaymentMethod)payment.Method;
+            PaymentStatus = (PaymentStatus)payment.Status;
         }
 
-        public Payment(EFCore.Payment payment)
+        public Payment(EFCoreDal.Payment payment)
         {
             Id = payment.Id;
-            DueDate = payment.DueDate.Date;
-            PaymentMethod = (PaymentMethod)payment.PaymentMethod;
-            PaymentStatus = (PaymentStatus)payment.PaymentStatus;
+            DueDate = DateOnly.FromDateTime(payment.DueDate);
+            PaymentMethod = (PaymentMethod)payment.Method;
+            PaymentStatus = (PaymentStatus)payment.Status;
         }
 
-        public Payment(Relational.Payment payment)
+        public Payment(RelationalDal.Payment payment)
         {
             Id = payment.Id;
-            DueDate = payment.DueDate.Date;
-            PaymentMethod = (PaymentMethod)payment.PaymentMethod;
-            PaymentStatus = (PaymentStatus)payment.PaymentStatus;
+            DueDate = DateOnly.FromDateTime(payment.DueDate);
+            PaymentMethod = (PaymentMethod)payment.Method;
+            PaymentStatus = (PaymentStatus)payment.Status;
         }
     }
 }

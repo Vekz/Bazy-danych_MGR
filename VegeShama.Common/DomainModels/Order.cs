@@ -1,47 +1,46 @@
-﻿namespace VegeShama.Common.DomainModels
+﻿using EFCoreDal = VegeShama.Common.DatabaseModels.EFCore;
+using RavenDBDal = VegeShama.Common.DatabaseModels.RavenDB;
+using RelationalDal = VegeShama.Common.DatabaseModels.Relational;
+
+namespace VegeShama.Common.DomainModels
 {
     public class Order
     {
         public Guid Id { get; }
         public DateOnly DueDate { get; set; }
         public DateOnly DeliveryDate { get; set; }
-        public User User { get; set; }
         public Address Address { get; set; }
-        public List<Payment> Payments { get; set; }
+        public Payment Payment { get; set; }
         public List<Product> Products { get; set; }
 
-        public Order(MongoDB.Order order)
+        public Order(RavenDBDal.Order order)
         {
-            Id = order;
-            DueDate = order.DueDate.Date;
-            DeliveryDate = order.DeliveryDate.Date;
-            User = order.User;
+            Id = order.Id;
+            DueDate = DateOnly.FromDateTime(order.DueDate);
+            DeliveryDate = DateOnly.FromDateTime(order.DeliveryDate.Date);
             Address = new Address(order.Address);
-            Payments = order.Payments.Select(x => new Payment(x)).ToList();
+            Payment = new Payment(order.Payment);
             Products = order.Products.Select(x => new Product(x)).ToList();
         }
 
-        public Order(EFCore.Order order)
+        public Order(EFCoreDal.Order order)
         {
-            Id = order;
-            DueDate = order.DueDate.Date;
-            DeliveryDate = order.DeliveryDate.Date;
-            User = order.User;
+            Id = order.Id;
+            DueDate = DateOnly.FromDateTime(order.DueDate);
+            DeliveryDate = DateOnly.FromDateTime(order.DeliveryDate.Date);
             Address = new Address(order.Address);
-            Payments = order.Payments.Select(x => new Payment(x)).ToList();
+            Payment = new Payment(order.Payment);
             Products = order.Products.Select(x => new Product(x)).ToList();
         }
 
-        public Order(Relational.Order order, Relational.Address address, List<Relational.Payment> payments, List<Relational.Product> products)
+        public Order(RelationalDal.Order order, RelationalDal.Address address, RelationalDal.PostCode postCode, RelationalDal.Payment payment, List<Product> products)
         {
-            Id = order;
-            DueDate = order.DueDate.Date;
-            DeliveryDate = order.DeliveryDate.Date;
-            User = order.User;
-
-            Address = new Address(address);
-            Payments = payments.Select(x => new Payment(x)).ToList();
-            Products = products.Select(x => new Product(x)).ToList();
+            Id = order.Id;
+            DueDate = DateOnly.FromDateTime(order.DueDate);
+            DeliveryDate = DateOnly.FromDateTime(order.DeliveryDate.Date);
+            Address = new Address(address, postCode);
+            Payment = new Payment(payment);
+            Products = products;
         }
     }
 }

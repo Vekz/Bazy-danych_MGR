@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MongoDB\" />
+    <Folder Include="RavenDB\" />
     <Folder Include="Relational\" />
-    <Folder Include="RelationalWithObjects\" />
+    <Folder Include="EFCore\" />
   </ItemGroup>
 </Project>
