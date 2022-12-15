@@ -9,6 +9,10 @@
   <ItemGroup>
     <Folder Include="MongoDB\" />
     <Folder Include="Relational\" />
-    <Folder Include="RelationalWithObjects\" />
+    <Folder Include="EFCore\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
   </ItemGroup>
 </Project>
