@@ -29,7 +29,11 @@ namespace VegeShama.Controllers
         [Route("login")]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            return Ok(await _authService.Login(model));
+            var userId = await _authService.Login(model);
+            if (userId.HasValue)
+                return Ok(userId);
+            else
+                return Unauthorized();
         }
 
         [HttpPost]

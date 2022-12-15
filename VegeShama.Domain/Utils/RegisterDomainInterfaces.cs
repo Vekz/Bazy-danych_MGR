@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using VegeShama.Common.Enums;
+using VegeShama.Domain.Services;
+using VegeShama.Domain.Services.Interfaces;
 using VegeShama.Infrastructure.Utils;
 
 namespace VegeShama.Domain.Utils
@@ -9,6 +11,11 @@ namespace VegeShama.Domain.Utils
         public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
             //Register domain services
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IUsersService, UsersService>();
+
             return services;
         }
 
