@@ -1,5 +1,5 @@
-using VegeShama.Domain.Enums;
-using VegeShama.Infrastructure.Utils;
+using VegeShama.Common.Enums;
+using VegeShama.Domain.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
