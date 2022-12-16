@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using VegeShama.DAL.EFCore;
 
 namespace VegeShama.Infrastructure.Utils
 {
@@ -12,6 +13,7 @@ namespace VegeShama.Infrastructure.Utils
 
         public static IServiceCollection AddEFCoreProvider(this IServiceCollection services)
         {
+            services.ConfigureEFCoreContext();
             //Register relational-object repositories
             return services;
         }
