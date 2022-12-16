@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using VegeShama.DAL.EFCore;
+using VegeShama.DAL.Relational;
 
 namespace VegeShama.Infrastructure.Utils
 {
@@ -20,6 +21,7 @@ namespace VegeShama.Infrastructure.Utils
 
         public static IServiceCollection AddRelationalProvider(this IServiceCollection services)
         {
+            services.ConfigureRelationalConnection();
             //Register SQL Relational repositories
             return services;
         }
