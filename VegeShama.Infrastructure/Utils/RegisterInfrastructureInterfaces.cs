@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using VegeShama.DAL.EFCore;
+using VegeShama.DAL.RavenDB;
 using VegeShama.DAL.Relational;
 
 namespace VegeShama.Infrastructure.Utils
@@ -8,7 +9,10 @@ namespace VegeShama.Infrastructure.Utils
     {
         public static IServiceCollection AddRavenDBProvider(this IServiceCollection services)
         {
+            services.ConfigureRavenDBContext();
             //Register RavenDB repositories
+
+
             return services;
         }
 
@@ -16,6 +20,8 @@ namespace VegeShama.Infrastructure.Utils
         {
             services.ConfigureEFCoreContext();
             //Register relational-object repositories
+
+
             return services;
         }
 
@@ -23,6 +29,8 @@ namespace VegeShama.Infrastructure.Utils
         {
             services.ConfigureRelationalConnection();
             //Register SQL Relational repositories
+
+
             return services;
         }
     }

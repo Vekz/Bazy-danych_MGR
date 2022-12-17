@@ -27,9 +27,9 @@ namespace VegeShama.Common.DomainModels
         public User(EFCoreDal.User user)
         {
             Id = user.Id;
-            Name = user.Name;
-            Surname = user.Surname;
-            VAT_number = user.VAT_number;
+            Name = user.Customer.Name;
+            Surname = user.Customer.Surname;
+            VAT_number = user.Customer.VAT_number;
             Type = (UserType)user.Type;
             Orders = user.Customer.Orders.Select(x => new Order(x)).ToList();
         }
