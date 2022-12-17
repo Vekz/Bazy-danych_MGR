@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="RavenDB\" />
-    <Folder Include="Relational\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
