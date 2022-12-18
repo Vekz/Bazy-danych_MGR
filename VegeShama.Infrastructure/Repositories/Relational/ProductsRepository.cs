@@ -1,7 +1,11 @@
-﻿using System.Data;
+﻿using Dapper;
+using Microsoft.IdentityModel.Tokens;
+using System.Data;
+using System.Text;
 using VegeShama.Common.APIModels;
 using VegeShama.Common.DomainModels;
 using VegeShama.Infrastructure.Repositories.Interfaces;
+using DB = VegeShama.Common.DatabaseModels.Relational;
 
 namespace VegeShama.Infrastructure.Repositories.Relational
 {
@@ -14,29 +18,107 @@ namespace VegeShama.Infrastructure.Repositories.Relational
             _dbConnection = dbConnection;
         }
 
-        public Task<Product> AddProduct(AddProductModel model)
+        public async Task<Product> AddProduct(AddProductModel model)
         {
-            throw new NotImplementedException();
+            var sqlCat = "SELECT * FROM Category c WHERE c.Name = @name";
+            var category = _dbConnection.Query<DB.Category>(sqlCat, new { name = model.Category });
+            if (category.IsNullOrEmpty())
+            {
+                var categoryCreation = "INSERT INTO Category (Name) VALUES (@name)";
+                _dbConnection.Execute(categoryCreation, new { name = model.Category });
+                category = _dbConnection.Query<DB.Category>(sqlCat, new { name = model.Category });
+            }
+
+            var product = new DB.Product()
+            {
+                Name = model.Name,
+                Price = model.Price,
+                CategoryId = category.First().Id
+            };
+
+            var sqlInsertProduct = "INSERT INTO Product (Name, Price, CategoryId) VALUES (@Name, @Price, @CategoryId)";
+            _dbConnection.Execute(sqlInsertProduct, product);
+
+            var sql = "SELECT p.*, c.* FROM Product p JOIN Category c ON c.Id = p.CategoryId WHERE p.Name = @name AND p.Price = @price";
+
+            var products = await _dbConnection.QueryAsync<DB.Product, DB.Category, DB.Product>(
+                sql,
+                (prod, cat) =>
+                {
+                    prod.Category = cat;
+                    return prod;
+                },
+                new { name = model.Name, price = model.Price }
+            );
+            var productRet = products.FirstOrDefault();
+            return new Product(productRet);
         }
 
-        public Task DeleteProduct(Guid id)
+        public async Task DeleteProduct(Guid id)
         {
-            throw new NotImplementedException();
+            var sql = "DELETE FROM Product p WHERE p.Id = @id";
+            await _dbConnection.ExecuteAsync(sql, new { id });
         }
 
-        public Task<List<Product>> GetAll()
+        public async Task<List<Product>> GetAll()
         {
-            throw new NotImplementedException();
+            var sql = "SELECT p.*, c.* FROM Product p JOIN Category c ON c.Id = p.CategoryId";
+
+            var products = await _dbConnection.QueryAsync<DB.Product, DB.Category, DB.Product>(sql, (prod, cat) =>
+            {
+                prod.Category = cat;
+                return prod;
+            });
+
+            return products?.Select(x => new Product(x)).ToList() ?? new List<Product>();
         }
 
-        public Task<Product> GetProductById(Guid id)
+        public async Task<Product> GetProductById(Guid id)
         {
-            throw new NotImplementedException();
+            var sql = "SELECT p.*, c.* FROM Product p JOIN Category c ON c.Id = p.CategoryId WHERE p.Id = @id";
+
+            var products = await _dbConnection.QueryAsync<DB.Product, DB.Category, DB.Product>(
+                sql,
+                (prod, cat) =>
+                {
+                    prod.Category = cat;
+                    return prod;
+                },
+                new { id }
+            );
+            var product = products.FirstOrDefault();
+            if (product is null)
+                return null;
+
+            return new Product(product);
         }
 
-        public Task<Product> UpdateProduct(Guid id, UpdateProductModel model)
+        public async Task<Product> UpdateProduct(Guid id, UpdateProductModel model)
         {
-            throw new NotImplementedException();
+            if (model.Name != null || model.Price != null)
+            {
+                StringBuilder sqlSB = new StringBuilder("UPDATE Product SET ");
+                List<string> updateParts = new List<string>();
+
+                if (model.Name != null)
+                    updateParts.Add($"Name = '{model.Name}'");
+                if (model.Price != null)
+                    updateParts.Add($"Price = {model.Price}");
+
+                var joinedUpdates = string.Join(",", updateParts);
+                sqlSB.Append(joinedUpdates);
+                sqlSB.Append(" WHERE id = @id");
+
+                await _dbConnection.ExecuteAsync(sqlSB.ToString(), new { id });
+            }
+
+            if (model.Category != null)
+            {
+                var sqlUpdateCategory = "UPDATE c SET Name = @name FROM Category c JOIN Product p ON p.CategoryId = c.Id WHERE p.Id = @id";
+                await _dbConnection.ExecuteAsync(sqlUpdateCategory, new { id, name = model.Category });
+            }
+
+            return await GetProductById(id);
         }
     }
 }

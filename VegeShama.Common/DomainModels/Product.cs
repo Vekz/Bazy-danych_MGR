@@ -27,12 +27,12 @@ namespace VegeShama.Common.DomainModels
             Category = product.Category;
         }
 
-        public Product(RelationalDal.Product product, RelationalDal.Category category)
+        public Product(RelationalDal.Product product)
         {
             Id = product.Id;
             Name = product.Name;
             Price = product.Price;
-            Category = category.Name;
+            Category = product.Category.Name;
         }
     }
 }

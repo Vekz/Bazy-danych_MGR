@@ -12,7 +12,7 @@ namespace VegeShama.DAL.Relational
             var config = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
                             .Build();
-            var connStr = config.GetConnectionString("EFCore");
+            var connStr = config.GetConnectionString("Relational");
 
             services.AddTransient<IDbConnection>((sp) => new SqlConnection(connStr));
 
