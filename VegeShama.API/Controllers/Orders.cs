@@ -19,7 +19,10 @@ namespace VegeShama.API.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            return Ok(await _ordersService.GetOrder(id));
+            var order = await _ordersService.GetOrder(id);
+            if (order is null)
+                return NotFound();
+            return Ok(order);
         }
 
         [HttpPost]

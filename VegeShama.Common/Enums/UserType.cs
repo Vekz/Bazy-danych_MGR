@@ -1,6 +1,6 @@
 ﻿namespace VegeShama.Common.Enums
 {
-    public enum UserType
+    public enum UserType : byte
     {
         Customer,
         Seller,

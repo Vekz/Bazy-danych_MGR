@@ -1,6 +1,6 @@
 ﻿namespace VegeShama.Common.Enums
 {
-    public enum PaymentMethod
+    public enum PaymentMethod : byte
     {
         CreditCard,
         BLIK

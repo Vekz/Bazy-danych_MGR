@@ -7,20 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="RavenDB\" />
+	<Folder Include="RavenDB\Migrations\" />
+	<Folder Include="Relational\" />
+	<Folder Include="EFCore\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+	  <PackageReference Include="Dapper" Version="2.0.123" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.1" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.1" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.1" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+	  <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VegeShama.Common\VegeShama.Common.csproj" />
+	  <ProjectReference Include="..\VegeShama.Common\VegeShama.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RavenDB.Client" Version="5.4.5" />
+    <PackageReference Include="RavenDB.Identity" Version="8.0.7" />
   </ItemGroup>
 </Project>

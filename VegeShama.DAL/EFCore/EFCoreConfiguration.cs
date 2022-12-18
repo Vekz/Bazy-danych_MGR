@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
 
 namespace VegeShama.DAL.EFCore
 {
@@ -14,7 +13,7 @@ namespace VegeShama.DAL.EFCore
                             .Build();
             var connStr = config.GetConnectionString("EFCore");
 
-            services.AddDbContext<EFVegeContext>(options => options.UseSqlServer(connStr));
+            services.AddDbContext<EFVegeContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connStr));
 
             return services;
         }

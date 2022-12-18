@@ -3,7 +3,7 @@ namespace VegeShama.Common.DatabaseModels.RavenDB
 {
     public class Order
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime DeliveryDate { get; set; }
         public Payment Payment { get; set; }

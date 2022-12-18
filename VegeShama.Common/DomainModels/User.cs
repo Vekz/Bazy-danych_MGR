@@ -16,7 +16,7 @@ namespace VegeShama.Common.DomainModels
 
         public User(RavenDBDal.User user)
         {
-            Id = user.Id;
+            Id = Guid.Parse(user.Id);
             Name = user.Name;
             Surname = user.Surname;
             VAT_number = user.VAT_number;
@@ -27,19 +27,19 @@ namespace VegeShama.Common.DomainModels
         public User(EFCoreDal.User user)
         {
             Id = user.Id;
-            Name = user.Name;
-            Surname = user.Surname;
-            VAT_number = user.VAT_number;
+            Name = user.Customer?.Name;
+            Surname = user.Customer?.Surname;
+            VAT_number = user.Customer?.VAT_number;
             Type = (UserType)user.Type;
-            Orders = user.Customer.Orders.Select(x => new Order(x)).ToList();
+            Orders = user.Customer?.Orders.Select(x => new Order(x)).ToList();
         }
 
-        public User(RelationalDal.User user, List<Order> orders)
+        public User(RelationalDal.User user, RelationalDal.Customer customer, List<Order> orders)
         {
             Id = user.Id;
-            Name = user.Name;
-            Surname = user.Surname;
-            VAT_number = user.VAT_number;
+            Name = customer?.Name;
+            Surname = customer?.Surname;
+            VAT_number = customer?.VAT_number;
             Type = (UserType)user.Type;
 
             Orders = orders;
