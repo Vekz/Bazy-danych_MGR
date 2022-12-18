@@ -61,7 +61,10 @@ namespace VegeShama.Controllers
         [Route("{id:Guid}/orders")]
         public async Task<IActionResult> GetForUser(Guid id)
         {
-            return Ok(await _ordersService.GetForUser(id));
+            var orders = await _ordersService.GetForUser(id);
+            if (orders is null)
+                return NotFound();
+            return Ok(orders);
         }
     }
 }
