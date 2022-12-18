@@ -1,4 +1,6 @@
-﻿namespace VegeShama.Common.DatabaseModels.EFCore
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VegeShama.Common.DatabaseModels.EFCore
 {
     public class User
     {
@@ -6,8 +8,9 @@
         public string Login { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public int Type { get; set; }
+        public byte Type { get; set; }
 
-        public Customer Customer { get; set; }
+        [Required]
+        public virtual Customer Customer { get; set; }
     }
 }

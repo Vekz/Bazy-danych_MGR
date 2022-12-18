@@ -7,7 +7,8 @@
         public string Surname { get; set; }
         public string VAT_number { get; set; }
 
-        public List<Order> Orders { get; set; }
-        public User User { get; set; }
+        public virtual List<Order> Orders { get; set; }
+        public Guid UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

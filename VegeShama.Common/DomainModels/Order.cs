@@ -15,7 +15,7 @@ namespace VegeShama.Common.DomainModels
 
         public Order(RavenDBDal.Order order)
         {
-            Id = order.Id;
+            Id = Guid.Parse(order.Id);
             DueDate = DateOnly.FromDateTime(order.DueDate);
             DeliveryDate = DateOnly.FromDateTime(order.DeliveryDate.Date);
             Address = new Address(order.Address);
@@ -30,7 +30,7 @@ namespace VegeShama.Common.DomainModels
             DeliveryDate = DateOnly.FromDateTime(order.DeliveryDate.Date);
             Address = new Address(order.Address);
             Payment = new Payment(order.Payment);
-            Products = order.Products.Select(x => new Product(x)).ToList();
+            Products = order.OrderProducts.Select(x => new Product(x.Product)).ToList();
         }
 
         public Order(RelationalDal.Order order, RelationalDal.Address address, RelationalDal.PostCode postCode, RelationalDal.Payment payment, List<Product> products)

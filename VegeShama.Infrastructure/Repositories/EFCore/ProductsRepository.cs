@@ -35,13 +35,19 @@ namespace VegeShama.Infrastructure.Repositories.EFCore
             var productToDelete = _dbContext.Product.FindAsync(id);
 
             _dbContext.Product.Remove(await productToDelete);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<List<Product>> GetAll()
             => await _dbContext.Product.Select(x => new Product(x)).ToListAsync();
 
         public async Task<Product> GetProductById(Guid id)
-            => await _dbContext.Product.Where(x => x.Id == id).Select(x => new Product(x)).FirstOrDefaultAsync();
+        {
+            var product = await _dbContext.Product.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (product is null)
+                return null;
+            return new Product(product);
+        }
 
         public async Task<Product> UpdateProduct(Guid id, UpdateProductModel model)
         {

@@ -14,7 +14,7 @@ namespace VegeShama.Common.DomainModels
 
         public Payment(RavenDBDal.Payment payment)
         {
-            Id = payment.Id;
+            Id = Guid.Parse(payment.Id);
             DueDate = DateOnly.FromDateTime(payment.DueDate);
             PaymentMethod = (PaymentMethod)payment.Method;
             PaymentStatus = (PaymentStatus)payment.Status;

@@ -1,6 +1,6 @@
 ﻿namespace VegeShama.Common.Enums
 {
-    public enum PaymentStatus
+    public enum PaymentStatus : byte
     {
         PreAuthorization,
         Commited,

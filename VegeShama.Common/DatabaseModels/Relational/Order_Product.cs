@@ -1,6 +1,6 @@
 ﻿namespace VegeShama.Common.DatabaseModels.Relational
 {
-    public class Product_Order
+    public class Order_Product
     {
         public Guid ProductId { get; set; }
         public Guid OrderId { get; set; }

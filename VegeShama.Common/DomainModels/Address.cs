@@ -14,7 +14,7 @@ namespace VegeShama.Common.DomainModels
 
         public Address(RavenDBDal.Address address)
         {
-            Id = address.Id;
+            Id = Guid.Parse(address.Id);
             Street = address.Street;
             StreetNumber = address.StreetNo;
             PostCode = address.PostCode;

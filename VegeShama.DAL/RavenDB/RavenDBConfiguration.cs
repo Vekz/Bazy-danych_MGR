@@ -7,7 +7,14 @@ namespace VegeShama.DAL.RavenDB
     {
         public static IServiceCollection ConfigureRavenDBContext(this IServiceCollection services)
         {
-            services.AddRavenDbDocStore();
+            services.AddRavenDbDocStore(o =>
+            {
+                //Setup mapping names for collections
+                o.BeforeInitializeDocStore = docStore =>
+                {
+                    docStore.Conventions.FindCollectionName = type => type.Name;
+                };
+            });
             services.AddRavenDbAsyncSession();
 
             return services;

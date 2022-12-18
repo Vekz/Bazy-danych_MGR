@@ -13,7 +13,7 @@ namespace VegeShama.Common.DomainModels
 
         public Product(RavenDBDal.Product product)
         {
-            Id = product.Id;
+            Id = Guid.Parse(product.Id);
             Name = product.Name;
             Price = product.Price;
             Category = product.Category;

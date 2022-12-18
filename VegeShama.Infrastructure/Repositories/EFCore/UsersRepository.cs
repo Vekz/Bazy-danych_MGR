@@ -44,19 +44,25 @@ namespace VegeShama.Infrastructure.Repositories.EFCore
 
         public async Task DeleteUser(Guid id)
         {
-            var userToDelete = _dbContext.User.FindAsync(id);
+            var userToDelete = _dbContext.User.FirstOrDefaultAsync(x => x.Id == id);
             _dbContext.User.Remove(await userToDelete);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<User> GetUserById(Guid id)
-            => await _dbContext.User.Where(x => x.Id == id).Select(x => new User(x)).FirstOrDefaultAsync();
+        {
+            var user = await _dbContext.User.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (user is null)
+                return null;
+            return new User(user);
+        }
 
         public async Task<Guid?> GetUserIdByCredentials(LoginModel model)
-            => await _dbContext.User.Where(x => x.Login == model.Login && x.Password == model.Password).Select(x => x.Id).FirstOrDefaultAsync();
+            => (await _dbContext.User.Where(x => x.Login == model.Login && x.Password == model.Password).FirstOrDefaultAsync())?.Id;
 
         public async Task<User> UpdateUser(Guid id, UpdateUserModel model)
         {
-            var user = await _dbContext.User.FindAsync(id);
+            var user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == id);
             if (user is null)
                 return null;
 

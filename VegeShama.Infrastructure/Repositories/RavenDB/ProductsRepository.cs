@@ -1,7 +1,10 @@
-﻿using Raven.Client.Documents.Session;
+﻿using Raven.Client.Documents;
+using Raven.Client.Documents.Session;
 using VegeShama.Common.APIModels;
 using VegeShama.Common.DomainModels;
 using VegeShama.Infrastructure.Repositories.Interfaces;
+using DB = VegeShama.Common.DatabaseModels.RavenDB;
+
 
 namespace VegeShama.Infrastructure.Repositories.RavenDB
 {
@@ -14,29 +17,55 @@ namespace VegeShama.Infrastructure.Repositories.RavenDB
             _docSession = docSession;
         }
 
-        public Task<Product> AddProduct(AddProductModel model)
+        public async Task<Product> AddProduct(AddProductModel model)
         {
-            throw new NotImplementedException();
+            var product = new DB.Product()
+            {
+                Name = model.Name,
+                Price = model.Price,
+                Category = model.Category,
+                Id = String.Empty,
+            };
+
+            await _docSession.StoreAsync(product);
+            await _docSession.SaveChangesAsync();
+            return new Product(product);
         }
 
-        public Task DeleteProduct(Guid id)
+        public async Task DeleteProduct(Guid id)
         {
-            throw new NotImplementedException();
+            var product = await _docSession.LoadAsync<DB.Product>(id.ToString());
+            _docSession.Delete(product);
+            await _docSession.SaveChangesAsync();
         }
 
-        public Task<List<Product>> GetAll()
+        public async Task<List<Product>> GetAll()
         {
-            throw new NotImplementedException();
+            var products = await _docSession.Query<DB.Product>().ToListAsync();
+            return products.Select(x => new Product(x)).ToList();
         }
 
-        public Task<Product> GetProductById(Guid id)
+        public async Task<Product> GetProductById(Guid id)
         {
-            throw new NotImplementedException();
+            var product = await _docSession.LoadAsync<DB.Product>(id.ToString());
+            return new Product(product);
         }
 
-        public Task<Product> UpdateProduct(Guid id, UpdateProductModel model)
+        public async Task<Product> UpdateProduct(Guid id, UpdateProductModel model)
         {
-            throw new NotImplementedException();
+            var product = await _docSession.LoadAsync<DB.Product>(id.ToString());
+            if (product is null)
+                return null;
+
+            if (model.Name != null)
+                product.Name = model.Name;
+            if (model.Price.HasValue)
+                product.Price = model.Price.Value;
+            if (model.Category != null)
+                product.Category = model.Category;
+
+            await _docSession.SaveChangesAsync();
+            return new Product(product);
         }
     }
 }

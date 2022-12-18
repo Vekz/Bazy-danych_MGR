@@ -22,7 +22,7 @@ namespace VegeShama.API.Controllers
             var order = await _ordersService.GetOrder(id);
             if (order is null)
                 return NotFound();
-            return Ok();
+            return Ok(order);
         }
 
         [HttpPost]

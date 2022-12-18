@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
         public DateTime DueDate { get; set; }
-        public int Method { get; set; }
-        public int Status { get; set; }
+        public byte Method { get; set; }
+        public byte Status { get; set; }
     }
 }

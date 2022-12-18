@@ -27,7 +27,7 @@ namespace VegeShama.Controllers
 
         [HttpGet]
         [Route("login")]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login([FromQuery] LoginModel model)
         {
             var userId = await _authService.Login(model);
             if (userId.HasValue)

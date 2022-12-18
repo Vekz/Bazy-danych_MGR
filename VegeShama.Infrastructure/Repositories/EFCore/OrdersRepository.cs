@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VegeShama.Common.APIModels;
 using VegeShama.Common.DomainModels;
+using VegeShama.Common.Enums;
 using VegeShama.DAL.EFCore;
 using VegeShama.Infrastructure.Repositories.Interfaces;
 using DB = VegeShama.Common.DatabaseModels.EFCore;
@@ -24,17 +25,33 @@ namespace VegeShama.Infrastructure.Repositories.EFCore
                 DeliveryDate = DateTime.Now.AddDays(12),
             };
 
-            var address = new DB.Address()
+            order.Address = new DB.Address()
             {
                 Street = model.Address.Street,
                 StreetNo = model.Address.StreetNumber,
                 PostCode = model.Address.PostCode,
                 City = model.Address.City,
             };
-            order.Address = address;
 
+            order.OrderProducts = new List<DB.Order_Product>();
             var products = _dbContext.Product.Where(x => model.ProductIds.Contains(x.Id));
-            order.Products.AddRange(products);
+            await products.ForEachAsync(x =>
+            {
+                var order_product = new DB.Order_Product()
+                {
+                    Order = order,
+                    Product = x,
+                };
+
+                order.OrderProducts.Add(order_product);
+            });
+
+            order.Payment = new DB.Payment()
+            {
+                DueDate = DateTime.Now.AddDays(7),
+                Method = (byte)PaymentMethod.CreditCard,
+                Status = (byte)PaymentStatus.PreAuthorization
+            };
 
             var user = await _dbContext.User.FindAsync(model.UserId);
             order.Customer = user.Customer;
@@ -47,11 +64,16 @@ namespace VegeShama.Infrastructure.Repositories.EFCore
         }
 
         public async Task<Order> GetOrderById(Guid id)
-            => await _dbContext.Order.Where(x => x.Id == id).Select(x => new Order(x)).FirstOrDefaultAsync();
+        {
+            var order = await _dbContext.Order.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (order is null)
+                return null;
+            return new Order(order);
+        }
 
         public async Task<List<Order>> GetOrdersForUser(Guid id)
         {
-            var user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _dbContext.User.FindAsync(id);
             return user?.Customer.Orders.Select(x => new Order(x)).ToList();
         }
     }
