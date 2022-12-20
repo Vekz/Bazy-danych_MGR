@@ -8,6 +8,6 @@
         public string Email { get; set; }
         public byte Type { get; set; }
 
-        public Guid CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }
