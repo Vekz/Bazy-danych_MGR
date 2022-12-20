@@ -16,6 +16,7 @@ namespace VegeShama.DAL.RavenDB
                 };
             });
             services.AddRavenDbAsyncSession();
+            services.AddRavenDbSession();
 
             return services;
         }

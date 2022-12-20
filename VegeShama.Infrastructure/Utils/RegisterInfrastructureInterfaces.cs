@@ -19,6 +19,7 @@ namespace VegeShama.Infrastructure.Utils
             services.AddTransient<IOrdersRepository, RavenDB.OrdersRepository>();
             services.AddTransient<IProductsRepository, RavenDB.ProductsRepository>();
             services.AddTransient<IUsersRepository, RavenDB.UsersRepository>();
+            services.AddTransient<ITestRepository, RavenDB.TestRepository>();
 
             return services;
         }
@@ -31,6 +32,7 @@ namespace VegeShama.Infrastructure.Utils
             services.AddTransient<IOrdersRepository, EFCore.OrdersRepository>();
             services.AddTransient<IProductsRepository, EFCore.ProductsRepository>();
             services.AddTransient<IUsersRepository, EFCore.UsersRepository>();
+            services.AddTransient<ITestRepository, EFCore.TestRepository>();
 
             return services;
         }
@@ -43,6 +45,7 @@ namespace VegeShama.Infrastructure.Utils
             services.AddTransient<IOrdersRepository, Relational.OrdersRepository>();
             services.AddTransient<IProductsRepository, Relational.ProductsRepository>();
             services.AddTransient<IUsersRepository, Relational.UsersRepository>();
+            services.AddTransient<ITestRepository, Relational.TestRepository>();
 
             return services;
         }
