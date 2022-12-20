@@ -15,6 +15,7 @@ namespace VegeShama.Domain.Utils
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ITestService, TestService>();
 
             return services;
         }

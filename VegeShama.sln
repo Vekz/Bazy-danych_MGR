@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegeShama.API", ".\VegeShama.API\VegeShama.API.csproj", "{BD819E8F-7C2F-4B08-8D5C-E11706E50C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VegeShama.API", "VegeShama.API\VegeShama.API.csproj", "{BD819E8F-7C2F-4B08-8D5C-E11706E50C5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegeShama.Domain", ".\VegeShama.Domain\VegeShama.Domain.csproj", "{F9E9B136-ACB8-454A-8AD7-809B0DB8D2E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VegeShama.Domain", "VegeShama.Domain\VegeShama.Domain.csproj", "{F9E9B136-ACB8-454A-8AD7-809B0DB8D2E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegeShama.Infrastructure", ".\VegeShama.Infrastructure\VegeShama.Infrastructure.csproj", "{F02DBB08-5D04-40CB-A88A-1BC66E3D1941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VegeShama.Infrastructure", "VegeShama.Infrastructure\VegeShama.Infrastructure.csproj", "{F02DBB08-5D04-40CB-A88A-1BC66E3D1941}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegeShama.DAL", ".\VegeShama.DAL\VegeShama.DAL.csproj", "{CF9106C9-4C9C-42F4-8888-FFBB44ADCB9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VegeShama.DAL", "VegeShama.DAL\VegeShama.DAL.csproj", "{CF9106C9-4C9C-42F4-8888-FFBB44ADCB9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegeShama.Common", ".\VegeShama.Common\VegeShama.Common.csproj", "{36616D52-9FEE-4D5D-A29F-5E2B41667CDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VegeShama.Common", "VegeShama.Common\VegeShama.Common.csproj", "{36616D52-9FEE-4D5D-A29F-5E2B41667CDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
