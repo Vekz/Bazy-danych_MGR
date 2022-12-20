@@ -1,8 +1,8 @@
 ﻿namespace VegeShama.Common.DatabaseModels.Relational
 {
-    public class PostCode
+    public class PostCode_DB
     {
-        public string Code { get; set; }
+        public string PostCode { get; set; }
         public string City { get; set; }
     }
 }

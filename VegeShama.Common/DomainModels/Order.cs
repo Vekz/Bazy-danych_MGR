@@ -33,14 +33,14 @@ namespace VegeShama.Common.DomainModels
             Products = order.OrderProducts.Select(x => new Product(x.Product)).ToList();
         }
 
-        public Order(RelationalDal.Order order, RelationalDal.Address address, RelationalDal.PostCode postCode, RelationalDal.Payment payment, List<Product> products)
+        public Order(RelationalDal.Order order)
         {
             Id = order.Id;
             DueDate = DateOnly.FromDateTime(order.DueDate);
             DeliveryDate = DateOnly.FromDateTime(order.DeliveryDate.Date);
-            Address = new Address(address, postCode);
-            Payment = new Payment(payment);
-            Products = products;
+            Address = new Address(order.Address);
+            Payment = new Payment(order.Payment);
+            Products = order.Products.Select(x => new Product(x)).ToList();
         }
     }
 }

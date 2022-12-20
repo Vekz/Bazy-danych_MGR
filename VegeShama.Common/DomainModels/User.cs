@@ -34,15 +34,14 @@ namespace VegeShama.Common.DomainModels
             Orders = user.Customer?.Orders.Select(x => new Order(x)).ToList();
         }
 
-        public User(RelationalDal.User user, RelationalDal.Customer customer, List<Order> orders)
+        public User(RelationalDal.User user, List<Order> orders = null)
         {
             Id = user.Id;
-            Name = customer?.Name;
-            Surname = customer?.Surname;
-            VAT_number = customer?.VAT_number;
+            Name = user.Customer?.Name;
+            Surname = user.Customer?.Surname;
+            VAT_number = user.Customer?.VAT_number;
             Type = (UserType)user.Type;
-
-            Orders = orders;
+            Orders = orders ?? user.Customer?.Orders.Select(x => new Order(x)).ToList();
         }
     }
 }

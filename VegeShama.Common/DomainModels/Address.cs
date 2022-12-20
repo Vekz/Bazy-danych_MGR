@@ -30,13 +30,13 @@ namespace VegeShama.Common.DomainModels
             City = address.City;
         }
 
-        public Address(RelationalDal.Address address, RelationalDal.PostCode postCode)
+        public Address(RelationalDal.Address address)
         {
             Id = address.Id;
             Street = address.Street;
             StreetNumber = address.StreetNo;
-            PostCode = address.PostCode;
-            City = postCode.City;
+            PostCode = address.Post.PostCode;
+            City = address.Post.City;
         }
     }
 }
